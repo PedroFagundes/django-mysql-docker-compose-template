@@ -1,0 +1,5 @@
+# Linting
+autopep8==1.5.4
+
+# Utilities
+django-extensions==3.0.9

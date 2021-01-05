@@ -1,0 +1,14 @@
+# Django
+Django==3.1.4
+
+# Database
+mysqlclient==2.0.1
+
+# Gunicorn
+gunicorn==20.0.4
+
+# Utilities
+python-decouple==3.3
+
+# Static files
+whitenoise==5.1.0
