@@ -24,7 +24,7 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 
-PROJECT_APPS = ['video']
+PROJECT_APPS = []
 
 THIRD_PARTY_APPS = []
 
