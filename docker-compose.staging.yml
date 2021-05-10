@@ -1,0 +1,35 @@
+version: "3"
+services:
+  db:
+    container_name: helloteam.db
+    image: mysql:5.7
+    ports:
+      - '3329:3306'
+    environment:
+       MYSQL_DATABASE: 'helloteam_db'
+       MYSQL_ROOT_PASSWORD: 'docker'
+    volumes:
+      - /tmp/helloteam/mysql:/var/lib/mysql
+
+  mailhog:
+    image: mailhog/mailhog
+    logging:
+      driver: 'none'  # disable saving logs
+    ports:
+      - 1025:1025 # smtp server
+      - 8025:8025 # web ui
+
+  api:
+    restart: always
+    env_file:
+      - .env.staging
+    container_name: helloteam.api
+    image: 336555378973.dkr.ecr.us-east-1.amazonaws.com/helloteam-api:staging
+    ports:
+      - 8001:8000
+    depends_on:
+      - db
+      - mailhog
+    links:
+      - db
+      - mailhog

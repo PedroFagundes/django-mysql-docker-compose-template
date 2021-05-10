@@ -11,16 +11,26 @@ services:
     volumes:
       - ./tmp/helloteam/mysql:/var/lib/mysql
 
-  web:
-    container_name: helloteam.web
+  mailhog:
+    image: mailhog/mailhog
+    logging:
+      driver: 'none'  # disable saving logs
+    ports:
+      - 1025:1025 # smtp server
+      - 8025:8025 # web ui
+
+  api:
+    container_name: helloteam.api
     env_file:
       - .env
     build: .
     volumes:
-      - .:/usr/src/app
+      - .:/app
     ports:
       - 8000:8000
     depends_on:
       - db
+      - mailhog
     links:
       - db
+      - mailhog
